@@ -2,6 +2,7 @@ import * as React from 'react'
 
 export type BesogoProps = {
   sgfUrl?: string
+  onCreate: (editor: any) => void
 }
 
 const besogo = (window as any).besogo
@@ -13,7 +14,8 @@ export const Besogo: React.FC<BesogoProps> = props => {
       options.sgf = props.sgfUrl
     }
 
-    besogo.create(document.querySelector('#besogo-container'), options)
+    const editor = besogo.create(document.querySelector('#besogo-container'), options)
+    props.onCreate(editor)
 
     return () => {
       const container = document.querySelector('#besogo-container')
